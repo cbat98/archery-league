@@ -1,11 +1,39 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
+import { PlayerService } from '../../services/player.service';
+import { Player } from '../../models/player.model';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-players',
-  imports: [],
+  standalone: true,
+  imports: [FormsModule],
   templateUrl: './players.component.html',
   styleUrl: './players.component.css'
 })
-export class PlayersComponent {
+export class PlayersComponent implements OnInit {
+  private playerService = inject(PlayerService);
 
+  public players = signal<Player[]>([]);
+  public newPlayer = { firstName: '', lastName: '' };
+
+  ngOnInit(): void {
+    this.loadPlayers();
+  }
+
+  loadPlayers(): void {
+    this.playerService.getPlayers().subscribe(data => {
+      this.players.set(data);
+    });
+  }
+
+  onSubmit(): void {
+    if (!this.newPlayer.name.trim()) {
+      return;
+    }
+
+    this.playerService.addPlayer(this.newPlayer).subscribe(createdPlayer => {
+      this.players.update(currentPlayers => [...currentPlayers, createdPlayer]);
+      this.newPlayer = { name: '', email: '' };
+    });
+  }
 }

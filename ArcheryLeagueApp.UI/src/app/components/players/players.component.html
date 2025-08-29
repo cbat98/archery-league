@@ -1,1 +1,31 @@
-<p>players works!</p>
+<div class="container">
+  <section class="form-section">
+    <h2>Add New Player</h2>
+    <form #playerForm="ngForm" (ngSubmit)="onSubmit()">
+      <div>
+        <label for="firstName">First Name:</label>
+        <input id="firstName" name="firstName" [(ngModel)]="newPlayer.firstName" required>
+      </div>
+      <div>
+        <label for="lastName">Last Name:</label>
+        <input id="lastName" name="lastName" [(ngModel)]="newPlayer.lastName" required>
+      </div>
+      <button type="submit" [disabled]="playerForm.invalid">Add Player</button>
+    </form>
+  </section>
+
+  <section class="list-section">
+    <h2>Player List</h2>
+    @if (players().length > 0) {
+      <ul>
+        @for (player of players(); track player.playerId) {
+          <li>
+            <span>{{ player.firstName }} ({{ player.lastName }})</span>
+          </li>
+        }
+      </ul>
+    } @else {
+      <p>No players found. Add one using the form!</p>
+    }
+  </section>
+</div>
