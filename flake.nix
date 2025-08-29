@@ -15,6 +15,7 @@
         pkgs.dotnetCorePackages.dotnet_9.sdk
         pkgs.dotnet-ef
         pkgs.nodejs_20
+        pkgs.nodePackages."@angular/cli"
       ];
     };
   };
