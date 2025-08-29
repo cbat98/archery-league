@@ -9,13 +9,13 @@ import { Player } from '../models/player.model';
 export class PlayerService {
   private http = inject(HttpClient);
 
-  private apiUrl = 'https://localhost:7123/api/Players';
+  private apiUrl = 'http://localhost:5119/players';
 
   getPlayers(): Observable<Player[]> {
     return this.http.get<Player[]>(this.apiUrl);
   }
 
-  addPlayer(player: { name: string; email?: string }): Observable<Player> {
+  addPlayer(player: { firstName: string; lastName: string }): Observable<Player> {
     return this.http.post<Player>(this.apiUrl, player);
   }
 }

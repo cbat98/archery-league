@@ -27,13 +27,16 @@ export class PlayersComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (!this.newPlayer.name.trim()) {
+    if (!this.newPlayer.firstName.trim()) {
+      return;
+    }
+    if (!this.newPlayer.lastName.trim()) {
       return;
     }
 
     this.playerService.addPlayer(this.newPlayer).subscribe(createdPlayer => {
       this.players.update(currentPlayers => [...currentPlayers, createdPlayer]);
-      this.newPlayer = { name: '', email: '' };
+      this.newPlayer = { firstName: '', lastName: '' };
     });
   }
 }
