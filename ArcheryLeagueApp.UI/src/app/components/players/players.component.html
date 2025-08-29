@@ -20,7 +20,7 @@
       <ul>
         @for (player of players(); track player.playerId) {
           <li>
-            <span>{{ player.firstName }} ({{ player.lastName }})</span>
+            <span>{{ player.firstName }} {{ player.lastName }}</span>
           </li>
         }
       </ul>
