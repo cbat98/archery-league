@@ -28,8 +28,13 @@ public class PlayersController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult<Player>> PostPlayer(Player player)
+    public async Task<ActionResult<Player>> PostPlayer(CreatePlayerDto createPlayerDto)
     {
+        var player = new Player {
+            FirstName = createPlayerDto.FirstName,
+            LastName = createPlayerDto.LastName
+        };
+
         _context.Players.Add(player);
         await _context.SaveChangesAsync();
 

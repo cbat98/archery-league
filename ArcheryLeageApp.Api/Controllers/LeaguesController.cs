@@ -28,8 +28,15 @@ public class LeaguesController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult<League>> PostLeague(League league)
+    public async Task<ActionResult<League>> PostLeague(CreateLeagueDto createLeagueDto)
     {
+        var league = new League
+        {
+            Name = createLeagueDto.Name,
+            StartDate = DateTime.UtcNow,
+            IsComplete = false
+        };
+
         _context.Leagues.Add(league);
         await _context.SaveChangesAsync();
 
