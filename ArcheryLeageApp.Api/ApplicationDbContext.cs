@@ -18,7 +18,13 @@ public class ApplicationDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<LeaguePointAward>()
+            .HasKey(lpa => lpa.AwardId );
+
         modelBuilder.Entity<LeagueParticipant>()
             .HasKey(lp => new { lp.PlayerId, lp.LeagueId });
+
+        modelBuilder.Entity<AwardReason>()
+            .HasKey(ar => ar.ReasonId );
     }
 }

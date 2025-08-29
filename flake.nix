@@ -13,6 +13,7 @@
     devShells."x86_64-linux".default = pkgs.mkShell {
       packages = [
         pkgs.dotnetCorePackages.dotnet_9.sdk
+        pkgs.dotnet-ef
       ];
     };
   };
