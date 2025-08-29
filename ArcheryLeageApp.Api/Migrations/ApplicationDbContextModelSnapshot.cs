@@ -69,8 +69,11 @@ namespace ArcheryLeageApp.Api.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("LeagueId"));
 
-                    b.Property<DateTime>("EndDate")
+                    b.Property<DateTime?>("EndDate")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<bool>("IsComplete")
+                        .HasColumnType("boolean");
 
                     b.Property<string>("Name")
                         .IsRequired()
