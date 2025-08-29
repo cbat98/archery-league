@@ -1,4 +1,4 @@
-public class LeaguePointAwards
+public class LeaguePointAward
 {
     public int AwardId { get; set; }
     public int PlayerId { get; set; }
