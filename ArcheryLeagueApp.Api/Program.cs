@@ -21,6 +21,12 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
+app.UseCors(x => x
+    .AllowAnyMethod()
+    .AllowAnyHeader()
+    .AllowAnyOrigin());
+
+
 app.MapControllers();
 
 app.Run();
