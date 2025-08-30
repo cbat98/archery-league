@@ -33,7 +33,9 @@ public class PlayersController : ControllerBase
         var player = new Player
         {
             FirstName = createPlayerDto.FirstName,
-            LastName = createPlayerDto.LastName
+            LastName = createPlayerDto.LastName,
+            Username = createPlayerDto.Username,
+            Email = createPlayerDto.Email
         };
 
         _context.Players.Add(player);
