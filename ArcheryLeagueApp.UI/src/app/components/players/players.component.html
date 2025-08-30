@@ -21,6 +21,7 @@
         @for (player of players(); track player.playerId) {
           <li>
             <span>{{ player.firstName }} {{ player.lastName }}</span>
+            <button (click)="deletePlayer(player.playerId)">Delete</button>
           </li>
         }
       </ul>

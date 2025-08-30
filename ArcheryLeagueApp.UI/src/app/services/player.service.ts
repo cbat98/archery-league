@@ -18,4 +18,8 @@ export class PlayerService {
   addPlayer(player: { firstName: string; lastName: string }): Observable<Player> {
     return this.http.post<Player>(this.apiUrl, player);
   }
+
+  deletePlayer(playerId: number): Observable<Player> {
+    return this.http.delete<Player>(this.apiUrl + `/${playerId}`);
+  }
 }

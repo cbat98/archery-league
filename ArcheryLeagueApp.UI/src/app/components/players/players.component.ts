@@ -39,4 +39,10 @@ export class PlayersComponent implements OnInit {
       this.newPlayer = { firstName: '', lastName: '' };
     });
   }
+
+  deletePlayer(playerId: number): void {
+    this.playerService.deletePlayer(playerId).subscribe(() => {
+      this.loadPlayers();
+    });
+  }
 }
