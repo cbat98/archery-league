@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, inject, signal } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, inject } from '@angular/core';
 import { PlayerService } from '../../services/player.service';
 import { Player } from '../../models/player.model';
 import { FormsModule } from '@angular/forms';
@@ -15,7 +15,7 @@ export class PlayersComponent implements OnInit {
 
   private playerService = inject(PlayerService);
 
-  public players = signal<Player[]>([]);
+  public players: Player[] = [];
   public newPlayer = { firstName: '', lastName: '' };
 
   ngOnInit(): void {
@@ -24,7 +24,7 @@ export class PlayersComponent implements OnInit {
 
   loadPlayers(): void {
     this.playerService.getPlayers().subscribe(data => {
-      this.players.set(data);
+      this.players = data;
     });
   }
 
@@ -37,7 +37,7 @@ export class PlayersComponent implements OnInit {
     }
 
     this.playerService.addPlayer(this.newPlayer).subscribe(createdPlayer => {
-      this.players.update(currentPlayers => [...currentPlayers, createdPlayer]);
+      this.players.push(createdPlayer);
       this.newPlayer = { firstName: '', lastName: '' };
       this.firstNameInput.nativeElement.focus();
     });

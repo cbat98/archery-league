@@ -16,9 +16,9 @@
 
   <section class="list-section">
     <h2>Player List</h2>
-    @if (players().length > 0) {
+    @if (players.length > 0) {
       <ul>
-        @for (player of players(); track player.playerId) {
+        @for (player of players; track player.playerId) {
           <li>
             <span>{{ player.firstName }} {{ player.lastName }}</span>
             <button (click)="deletePlayer(player.playerId)">Delete</button>
