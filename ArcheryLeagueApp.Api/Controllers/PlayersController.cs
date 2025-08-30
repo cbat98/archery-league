@@ -30,7 +30,8 @@ public class PlayersController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<Player>> PostPlayer(CreatePlayerDto createPlayerDto)
     {
-        var player = new Player {
+        var player = new Player
+        {
             FirstName = createPlayerDto.FirstName,
             LastName = createPlayerDto.LastName
         };
@@ -39,5 +40,18 @@ public class PlayersController : ControllerBase
         await _context.SaveChangesAsync();
 
         return CreatedAtAction(nameof(GetPlayer), new { id = player.PlayerId }, player);
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<ActionResult> DeletePlayer(int id)
+    {
+        var player = await _context.Players.FindAsync(id);
+
+        if (player is null) return NotFound();
+
+        _context.Players.Remove(player);
+        await _context.SaveChangesAsync();
+
+        return NoContent();
     }
 }
