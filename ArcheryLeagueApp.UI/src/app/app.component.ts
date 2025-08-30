@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterOutlet, RouterLink } from '@angular/router';
 import { PlayersComponent } from './components/players/players.component';
 import { LeaguesComponent } from './components/leagues/leagues.component';
 
@@ -7,6 +7,7 @@ import { LeaguesComponent } from './components/leagues/leagues.component';
   selector: 'app-root',
   imports: [
     RouterOutlet,
+    RouterLink,
     PlayersComponent,
     LeaguesComponent
   ],
