@@ -4,7 +4,7 @@
     <form #playerForm="ngForm" (ngSubmit)="onSubmit()">
       <div>
         <label for="firstName">First Name:</label>
-        <input id="firstName" name="firstName" [(ngModel)]="newPlayer.firstName" required>
+        <input #firstName id="firstName" name="firstName" [(ngModel)]="newPlayer.firstName" required>
       </div>
       <div>
         <label for="lastName">Last Name:</label>

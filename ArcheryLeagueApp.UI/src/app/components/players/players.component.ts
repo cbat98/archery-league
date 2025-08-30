@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, inject, signal } from '@angular/core';
 import { PlayerService } from '../../services/player.service';
 import { Player } from '../../models/player.model';
 import { FormsModule } from '@angular/forms';
@@ -11,6 +11,8 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './players.component.css'
 })
 export class PlayersComponent implements OnInit {
+  @ViewChild('firstName') firstNameInput!: ElementRef;
+
   private playerService = inject(PlayerService);
 
   public players = signal<Player[]>([]);
@@ -37,6 +39,7 @@ export class PlayersComponent implements OnInit {
     this.playerService.addPlayer(this.newPlayer).subscribe(createdPlayer => {
       this.players.update(currentPlayers => [...currentPlayers, createdPlayer]);
       this.newPlayer = { firstName: '', lastName: '' };
+      this.firstNameInput.nativeElement.focus();
     });
   }
 
