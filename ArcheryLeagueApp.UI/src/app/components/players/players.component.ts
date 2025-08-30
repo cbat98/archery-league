@@ -5,7 +5,6 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-players',
-  standalone: true,
   imports: [FormsModule],
   templateUrl: './players.component.html',
   styleUrl: './players.component.css'

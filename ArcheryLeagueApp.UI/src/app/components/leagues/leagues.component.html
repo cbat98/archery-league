@@ -1,0 +1,28 @@
+<div class="container">
+  <section class="form-section">
+    <h2>Add New League</h2>
+    <form #leagueForm="ngForm" (ngSubmit)="onSubmit()">
+      <div>
+        <label for="name">Name:</label>
+        <input #name id="name" name="name" [(ngModel)]="newLeague.name" required>
+      </div>
+      <button type="submit" [disabled]="leagueForm.invalid">Add League</button>
+    </form>
+  </section>
+
+  <section class="list-section">
+    <h2>League List</h2>
+    @if (leagues.length > 0) {
+      <ul>
+        @for (league of leagues; track league.leagueId) {
+          <li>
+            <span>{{ league.name }}</span>
+            <button (click)="deleteLeague(league.leagueId)">Delete</button>
+          </li>
+        }
+      </ul>
+    } @else {
+      <p>No leagues found. Add one using the form!</p>
+    }
+  </section>
+</div>
