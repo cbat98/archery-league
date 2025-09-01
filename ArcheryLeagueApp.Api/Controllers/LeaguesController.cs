@@ -30,6 +30,10 @@ public class LeaguesController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<League>> PostLeague(CreateLeagueDto createLeagueDto)
     {
+        var existingLeague = _context.Leagues.Any(l => l.Name == createLeagueDto.Name);
+
+        if (existingLeague) return Conflict();
+
         var league = new League
         {
             Name = createLeagueDto.Name,

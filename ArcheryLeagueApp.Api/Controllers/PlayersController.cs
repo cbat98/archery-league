@@ -30,6 +30,13 @@ public class PlayersController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<Player>> PostPlayer(CreatePlayerDto createPlayerDto)
     {
+        var existingPlayer = _context.Players.Any(p =>
+            p.Username == createPlayerDto.Username ||
+            p.Email == createPlayerDto.Email
+        );
+
+        if (existingPlayer) return Conflict();
+
         var player = new Player
         {
             FirstName = createPlayerDto.FirstName,
