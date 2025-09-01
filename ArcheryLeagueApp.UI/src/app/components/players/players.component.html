@@ -10,6 +10,14 @@
         <label for="lastName">Last Name:</label>
         <input id="lastName" name="lastName" [(ngModel)]="newPlayer.lastName" required>
       </div>
+      <div>
+        <label for="username">Username:</label>
+        <input id="username" name="username" [(ngModel)]="newPlayer.username" required>
+      </div>
+      <div>
+        <label for="email">Email:</label>
+        <input id="email" name="email" [(ngModel)]="newPlayer.email" required email>
+      </div>
       <button type="submit" [disabled]="playerForm.invalid">Add Player</button>
     </form>
   </section>
@@ -20,7 +28,7 @@
       <ul>
         @for (player of players; track player.playerId) {
           <li>
-            <span>{{ player.firstName }} {{ player.lastName }}</span>
+            <span>{{ player.firstName }} {{ player.lastName }} ({{ player.username }})</span>
             <button (click)="deletePlayer(player.playerId)">Delete</button>
           </li>
         }

@@ -15,7 +15,7 @@ export class PlayersComponent implements OnInit {
   private playerService = inject(PlayerService);
 
   public players: Player[] = [];
-  public newPlayer = { firstName: '', lastName: '' };
+  public newPlayer = { firstName: '', lastName: '', username: '', email: '' };
 
   ngOnInit(): void {
     this.loadPlayers();
@@ -34,10 +34,16 @@ export class PlayersComponent implements OnInit {
     if (!this.newPlayer.lastName.trim()) {
       return;
     }
+    if (!this.newPlayer.username.trim()) {
+      return;
+    }
+    if (!this.newPlayer.email.trim()) {
+      return;
+    }
 
     this.playerService.addPlayer(this.newPlayer).subscribe(createdPlayer => {
       this.players.push(createdPlayer);
-      this.newPlayer = { firstName: '', lastName: '' };
+      this.newPlayer = { firstName: '', lastName: '', username: '', email: '' };
       this.firstNameInput.nativeElement.focus();
     });
   }
