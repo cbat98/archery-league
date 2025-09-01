@@ -7,9 +7,7 @@ import { LeaguesComponent } from './components/leagues/leagues.component';
   selector: 'app-root',
   imports: [
     RouterOutlet,
-    RouterLink,
-    PlayersComponent,
-    LeaguesComponent
+    RouterLink
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'

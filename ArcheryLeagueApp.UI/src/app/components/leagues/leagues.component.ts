@@ -10,7 +10,7 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './leagues.component.css'
 })
 export class LeaguesComponent {
-  @ViewChild('name') firstNameInput!: ElementRef;
+  @ViewChild('name') nameInput!: ElementRef;
 
   private leagueService = inject(LeagueService);
 
