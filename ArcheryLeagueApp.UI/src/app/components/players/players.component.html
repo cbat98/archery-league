@@ -19,7 +19,7 @@
         <input id="email" name="email" [(ngModel)]="newPlayer.email" required email>
       </div>
       <button type="submit" [disabled]="playerForm.invalid">Add Player</button>
-      <p #status>-status here-</p>
+      <p #status style="color: red"></p>
     </form>
   </section>
 

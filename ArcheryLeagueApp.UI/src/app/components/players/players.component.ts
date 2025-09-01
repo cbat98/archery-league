@@ -25,7 +25,7 @@ export class PlayersComponent implements OnInit {
   loadPlayers(): void {
     this.playerService.getPlayers().subscribe(data => {
       this.players = data;
-    });
+    }, err => { this.statusMessage.nativeElement.innerText = "Unable to load players" });
   }
 
   onSubmit(): void {
@@ -46,12 +46,12 @@ export class PlayersComponent implements OnInit {
       this.players.push(createdPlayer);
       this.newPlayer = { firstName: '', lastName: '', username: '', email: '' };
       this.firstNameInput.nativeElement.focus();
-    }, err => { this.statusMessage.nativeElement.innerText = "Error" });
+    }, err => { this.statusMessage.nativeElement.innerText = "Unable to add player" });
   }
 
   deletePlayer(playerId: number): void {
     this.playerService.deletePlayer(playerId).subscribe(() => {
       this.loadPlayers();
-    });
+    }, err => { this.statusMessage.nativeElement.innerText = "Unable to delete player" });
   }
 }
