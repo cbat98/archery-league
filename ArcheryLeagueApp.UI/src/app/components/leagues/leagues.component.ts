@@ -10,6 +10,8 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './leagues.component.css'
 })
 export class LeaguesComponent {
+  @ViewChild('name') firstNameInput!: ElementRef;
+
   private leagueService = inject(LeagueService);
 
   public leagues: League[] = [];
@@ -33,6 +35,7 @@ export class LeaguesComponent {
     this.leagueService.addLeague(this.newLeague).subscribe(createdLeague => {
       this.leagues.push(createdLeague);
       this.newLeague = { name: '' };
+      this.nameInput.nativeElement.focus();
     });
   }
 
