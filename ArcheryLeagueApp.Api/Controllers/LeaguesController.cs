@@ -42,5 +42,18 @@ public class LeaguesController : ControllerBase
 
         return CreatedAtAction(nameof(GetLeague), new { id = league.LeagueId }, league);
     }
+
+    [HttpDelete("{id}")]
+    public async Task<ActionResult> DeleteLeague(int id)
+    {
+        var league = await _context.Leagues.FindAsync(id);
+
+        if (league is null) return NotFound();
+
+        _context.Leagues.Remove(league);
+        await _context.SaveChangesAsync();
+
+        return NoContent();
+    }
 }
 
