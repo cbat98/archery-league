@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class LeaguesComponent {
   @ViewChild('name') nameInput!: ElementRef;
+  @ViewChild('status') statusMessage!: ElementRef;
 
   private leagueService = inject(LeagueService);
 
@@ -24,7 +25,7 @@ export class LeaguesComponent {
   loadLeagues(): void {
     this.leagueService.getLeagues().subscribe(data => {
       this.leagues = data;
-    });
+    }, err => { this.setStatus("Unable to fetch leagues") });
   }
 
   onSubmit(): void {
@@ -36,12 +37,16 @@ export class LeaguesComponent {
       this.leagues.push(createdLeague);
       this.newLeague = { name: '' };
       this.nameInput.nativeElement.focus();
-    });
+    }, err => { this.setStatus("Unable to add league") });
   }
 
   deleteLeague(leagueId: number): void {
     this.leagueService.deleteLeague(leagueId).subscribe(() => {
       this.loadLeagues();
-    });
+    }, err => { this.setStatus("Unable to delete league") });
+  }
+
+  setStatus(message: string) {
+    this.statusMessage.nativeElement.innerText = message;
   }
 }

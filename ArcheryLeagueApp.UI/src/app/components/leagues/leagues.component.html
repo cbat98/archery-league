@@ -7,6 +7,7 @@
         <input #name id="name" name="name" [(ngModel)]="newLeague.name" required>
       </div>
       <button type="submit" [disabled]="leagueForm.invalid">Add League</button>
+      <p #status style="color: red"></p>
     </form>
   </section>
 
