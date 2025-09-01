@@ -24,6 +24,7 @@ export class LeaguesComponent {
 
   loadLeagues(): void {
     this.leagueService.getLeagues().subscribe(data => {
+      this.setStatus('');
       this.leagues = data;
     }, err => { this.setStatus("Unable to fetch leagues") });
   }
@@ -34,6 +35,7 @@ export class LeaguesComponent {
     }
 
     this.leagueService.addLeague(this.newLeague).subscribe(createdLeague => {
+      this.setStatus('');
       this.leagues.push(createdLeague);
       this.newLeague = { name: '' };
       this.nameInput.nativeElement.focus();
@@ -42,6 +44,7 @@ export class LeaguesComponent {
 
   deleteLeague(leagueId: number): void {
     this.leagueService.deleteLeague(leagueId).subscribe(() => {
+      this.setStatus('');
       this.loadLeagues();
     }, err => { this.setStatus("Unable to delete league") });
   }

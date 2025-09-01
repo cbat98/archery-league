@@ -24,8 +24,9 @@ export class PlayersComponent implements OnInit {
 
   loadPlayers(): void {
     this.playerService.getPlayers().subscribe(data => {
+      this.setStatus('');
       this.players = data;
-    }, err => { this.statusMessage.nativeElement.innerText = "Unable to load players" });
+    }, err => { this.setStatus("Unable to load players") });
   }
 
   onSubmit(): void {
@@ -43,15 +44,21 @@ export class PlayersComponent implements OnInit {
     }
 
     this.playerService.addPlayer(this.newPlayer).subscribe(createdPlayer => {
+      this.setStatus('');
       this.players.push(createdPlayer);
       this.newPlayer = { firstName: '', lastName: '', username: '', email: '' };
       this.firstNameInput.nativeElement.focus();
-    }, err => { this.statusMessage.nativeElement.innerText = "Unable to add player" });
+    }, err => { this.setStatus("Unable to add player") });
   }
 
   deletePlayer(playerId: number): void {
     this.playerService.deletePlayer(playerId).subscribe(() => {
+      this.setStatus('');
       this.loadPlayers();
-    }, err => { this.statusMessage.nativeElement.innerText = "Unable to delete player" });
+    }, err => { this.setStatus("Unable to delete player") });
+  }
+
+  setStatus(message: string): void {
+    this.statusMessage.nativeElement.innerText = message;
   }
 }
