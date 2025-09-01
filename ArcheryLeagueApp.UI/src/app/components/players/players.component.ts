@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class PlayersComponent implements OnInit {
   @ViewChild('firstName') firstNameInput!: ElementRef;
+  @ViewChild('status') statusMessage!: ElementRef;
 
   private playerService = inject(PlayerService);
 
@@ -45,7 +46,7 @@ export class PlayersComponent implements OnInit {
       this.players.push(createdPlayer);
       this.newPlayer = { firstName: '', lastName: '', username: '', email: '' };
       this.firstNameInput.nativeElement.focus();
-    });
+    }, err => { this.statusMessage.nativeElement.innerText = "Error" });
   }
 
   deletePlayer(playerId: number): void {
